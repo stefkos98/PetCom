@@ -1,0 +1,25 @@
+button {
+    margin: 4px;
+    cursor: pointer;
+    margin-left:5px !important;
+    margin-right:5px !important;
+    margin-bottom:5px !important;
+}
+input {
+    text-align: center;
+    width: 50px;
+    margin: 4px;
+    margin-bottom:5px !important;
+}
+th{
+    vertical-align: middle !important;
+}
+td{
+    vertical-align: middle !important;
+    text-align: center!important;
+}
+hr{
+    border-width:6px !important;
+    background-color: #17a2b8 !important;
+}
+.dodaj td,.dodaj th{border-top:none!important;}

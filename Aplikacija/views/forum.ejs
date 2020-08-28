@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+    <%- include('partials/navbar.ejs'); %>
+
+    <div class='container'>
+        <br>
+        <%if(user!=undefined && user.tipkorisnika=="vlasnik"){%>
+        <div style='width:60%;margin:0 auto;'>
+            <h2 style='text-align: center;'>Postavi pitanje!</h2>
+
+            <form method='post' action='/forum/postavipitanje/<%=user._id%>?_method=PUT'>
+                <textarea rows="3" cols="30" name='text' class='btn-block' placeholder="Vase pitanje?"
+                    required></textarea>
+                <div class='form-group'>
+                    <button class='btn btn-lg btn-info btn-block form-control' style='margin-top:5%;'>Postavi
+                        pitanje</button>
+                </div>
+            </form>
+        </div>
+
+        <br>
+        <h2 style="color: rgb(0, 89, 255);">Postavljena pitanja:</h2>
+        <br>
+        <% if(Pitanja!=undefined){%>
+
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <% for(var p=0;p<Pitanja.length;p++){%>
+                <div>
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse<%=p%>"
+                                class="list-group-item list-group-item-action d-flex justify-content-between"><%=Pitanja[p].sadrzajpitanja%>
+                                <% if(Pitanja[p].korisnik==user._id){%>
+                                <div class="row"><span
+                                        class="badge badge-primary badge-pill"><%=Pitanja[p].odgovori.length%>
+                                        odgovor<%if(Pitanja[p].odgovori.length!=1){%>a<%}%></span>
+                                    <button type="button" class='btn btn-danger' style="margin-left: 5px;"
+                                        data-toggle="modal" data-target="#myModal<%=p%>"><svg class="bi bi-trash"
+                                            width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                            <path fill-rule="evenodd"
+                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                        </svg></button>
+                                </div>
+                                <%}else{%>
+                                <span class="badge badge-primary badge-pill"><%=Pitanja[p].odgovori.length%>
+                                    odgovor<%if(Pitanja[p].odgovori.length!=1){%>a<%}%></span>
+                                <%}%>
+                                </a>
+                            </h4>
+                           
+                          </div>
+                         
+                          <div id="collapse<%=p%>" class="panel-collapse collapse">
+                                <ul class="list-group">
+                                    <% if(Pitanja[p].odgovori.length!=0){%>
+
+                                    <%for (var o=0;o<Pitanja[p].odgovori.length;o++){%>
+                                    <li class="list-group-item"
+                                        style="border-color: white;border-width: 1px; background-color:rgb(243, 243, 243);">
+                                        <strong style="color: rgb(0, 89, 255);">Odgovor veterinara<%if(Pitanja[p].odgovori[o].idveterinara!=null){%>
+                                            <%=Pitanja[p].odgovori[o].idveterinara.username%><%}%>:</strong>
+                                        <br>
+                                        <p><%= Pitanja[p].odgovori[o].sadrzajodgovora%></p>
+                                    </li>
+                                    <%}%>
+                                
+                            <%}else{%>
+                                    <p style="color: rgb(0, 89, 255);">Jos uvek nema odgovora na ovo pitanje.</p>
+                                    <%}%>
+                                
+                            </ul>                           
+                          </div>
+
+                          
+                    </div>
+                    <div class="modal" id="myModal<%=p%>" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Brisanje pitanja</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Da li ste sigurni da zelite da obrisete ovo pitanje?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Odustani</button>
+                                                <form method='post'
+                                                    action='/forum/izbrisipitanje/<%=user._id%>/<%=Pitanja[p]._id%>?_method=DELETE'>
+                                                    <button type="submit" class="btn btn-danger">Izbrisi</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                    </div>
+
+                    <%}%>
+                        </div>
+                    </div>
+                        
+                <%}else{%>
+                    <p class='list-group-item lead' style="color: rgb(0, 89, 255);">Nema postavljenih pitanja.</p>
+                    <%}%>
+                <br> 
+            <%}%>
+
+                    <div style='width:90%;margin:0 auto;'>
+                        <%if(user!=undefined && user.tipkorisnika=="veterinar"){%>
+
+                        <br>
+                        <h2 style="color: rgb(0, 89, 255);">Postavljena pitanja:</h2>
+                        <br>
+                        <% if(Pitanja!=undefined){%>
+                        <div class="panel-group ">
+                            <div class="panel panel-default">
+                                <% for(var p=0;p<Pitanja.length;p++){%>
+                                <div>
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#collapse<%=p%>"
+                                                class="list-group-item list-group-item-action d-flex justify-content-between"><%=Pitanja[p].sadrzajpitanja%><span
+                                                    class="badge badge-primary badge-pill"><%=Pitanja[p].odgovori.length%>
+                                                    odgovor<%if(Pitanja[p].odgovori.length!=1){%>a<%}%></span></a>
+                                        </h4>
+
+                                    </div>
+                                    <div id="collapse<%=p%>" class="panel-collapse collapse">
+                                        <ul class="list-group">
+                                            <% if(Pitanja[p].odgovori.length!=0){%>
+
+                                            <%for (var o=0;o<Pitanja[p].odgovori.length;o++){%>
+                                            <% if(Pitanja[p].odgovori[o].idveterinara._id!=user._id){%>
+                                            <li class="list-group-item"
+                                                style="border-color: white;border-width: 2px; background-color:rgb(243, 243, 243);">
+                                                <strong style="color: rgb(0, 89, 255);">Odgovor veterinara<%if(Pitanja[p].odgovori[o].idveterinara!=null){%>
+                                                    <%=Pitanja[p].odgovori[o].idveterinara.username%><%}%>:</strong>
+
+                                                <p><%= Pitanja[p].odgovori[o].sadrzajodgovora%></p>
+                                            </li>
+                                            <%}else{%>
+                                            <div>
+                                                <li class="list-group-item"
+                                                    style="border-color: white;border-width: 2px; background-color:rgb(243, 243, 243);">
+                                                    <strong style="color: rgb(0, 89, 255);">Odgovor veterinara<%if(Pitanja[p].odgovori[o].idveterinara!=null){%>
+                                                        <%=Pitanja[p].odgovori[o].idveterinara.username%><%}%>:</strong>
+                                                    <%if (user.odobren==1){%>
+                                                    <button style="float:right;" type="button" class='btn btn-danger'
+                                                        data-toggle="modal" data-target="#myModal<%=p%><%=o%>"><svg
+                                                            class="bi bi-trash" width="1em" height="1em"
+                                                            viewBox="0 0 16 16" fill="currentColor"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                                            <path fill-rule="evenodd"
+                                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                                        </svg></button>
+                                                    <%}%>
+                                                    <p><%= Pitanja[p].odgovori[o].sadrzajodgovora%></p>
+                                            </div>
+
+                                            <%}%>
+                                      
+                                    <div class="modal" id="myModal<%=p%><%=o%>" tabindex="-1" role="dialog">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Brisanje odgovora</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Da li ste sigurni da zelite da obrisete ovaj odgovor?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Odustani</button>
+                                                        <form method='post'
+                                                            action='/forum/izbrisiodgovor/<%=Pitanja[p]._id%>/<%=Pitanja[p].odgovori[o]._id%>?_method=DELETE'>
+                                                            <button type="submit"
+                                                                class="btn btn-danger">Izbrisi</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+
+                                    <%}%>
+                                        <br>
+                                        <%if (user.odobren==1){%>
+                                    <form method='post'
+                                        action='/forum/odgovori/<%=user._id%>/<%=Pitanja[p]._id%>?_method=PUT'>
+                                        <textarea rows="3" cols="30" name='text' class='btn-block'
+                                            placeholder="Vas odgovor..." required></textarea>
+                                        <div class='form-group'>
+                                            <button class='btn btn-lg btn-info btn-block form-control'
+                                                style='margin-top:5%;'>Odgovori</button>
+                                        </div>
+                                    </form>
+                                    <%}%>
+                                    <%}else{%>
+                                    <p style="color: rgb(0, 89, 255);">Jos uvek nema odgovora na ovo pitanje.</p>
+                                    <%if (user.odobren==1){%>
+                                    <form method='post'
+                                        action='/forum/odgovori/<%=user._id%>/<%=Pitanja[p]._id%>?_method=PUT'>
+                                        <textarea rows="3" cols="30" name='text' class='btn-block'
+                                            placeholder="Vas odgovor..." required></textarea>
+                                        <div class='form-group'>
+                                            <button class='btn btn-lg btn-info btn-block form-control'
+                                                style='margin-top:5%;'>Odgovori</button>
+                                        </div>
+                                    </form>
+                                    <%}%>
+                                    <%}%>
+
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <%}%>
+                                </div>
+                            </div>
+                            <%}else{%>
+                            <p class='list-group-item lead' style="color: rgb(0, 89, 255);">Nema postavljenih pitanja.
+                            </p>
+                            <%}%>
+                <%}%>
+                        </div>
+                        <div style='width:90%;margin:0 auto;'>
+                            <%if(user==undefined){%>
+
+                            <br>
+                            <h2 style="color: rgb(0, 89, 255);">Prijavite se kao Vlasnik da bi postavili pitanje!</h2>
+                            <br>
+                            
+                            <% if(Pitanja!=undefined){%>
+                            <div class="panel-group">
+                                <div class="panel panel-default">
+                                    <% for(var p=0;p<Pitanja.length;p++){%>
+                                    <div>
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" href="#collapse<%=p%>"
+                                                    title="Klikni za prikaz/sakrivanje odgovora"
+                                                    class="list-group-item list-group-item-action d-flex justify-content-between"><%=Pitanja[p].sadrzajpitanja%><span
+                                                        class="badge badge-primary badge-pill"><%=Pitanja[p].odgovori.length%>
+                                                        odgovor<%if(Pitanja[p].odgovori.length!=1){%>a<%}%></span></a>
+                                            </h4>
+                                        </div>
+
+                                        <div id="collapse<%=p%>" class="panel-collapse collapse">
+                                            <ul class="list-group">
+                                                <% if(Pitanja[p].odgovori.length!=0){%>
+
+                                                <%for (var o=0;o<Pitanja[p].odgovori.length;o++){%>
+                                                <li class="list-group-item"
+                                                    style="border-color: white;border-width: 1px; background-color:rgb(243, 243, 243);">
+                                                    <strong style="color: rgb(0, 89, 255);">Odgovor veterinara<%if(Pitanja[p].odgovori[o].idveterinara!=null){%>
+                                                        <%=Pitanja[p].odgovori[o].idveterinara.username%><%}%>:</strong>
+                                                    <br>
+                                                    <p><%= Pitanja[p].odgovori[o].sadrzajodgovora%></p>
+                                                </li>
+                                                <%}%>
+                                    
+                                <%}else{%>
+                                                <p style="color: rgb(0, 89, 255);">Jos uvek nema odgovora na ovo
+                                                    pitanje.</p>
+                                                <%}%>
+                                    
+                                </ul>                           
+                              </div>
+                        </div>
+                        
+                        <%}%>
+                                        </div>
+                                    </div>
+                                    <%}else{%>
+                                    <p class='list-group-item lead' style="color: rgb(0, 89, 255);">Nema postavljenih
+                                        pitanja.</p>
+                                    <%}%>
+                <%}%>
+                                </div>
+
+                                <div style='width:90%;margin:0 auto;'>
+                                    <%if(user!=undefined && user.tipkorisnika == "prodavac"){%>
+
+                                    <br>
+                                    <h2 style="color: rgb(0, 89, 255);">Prijavite se kao Vlasnik da bi postavili
+                                        pitanje!</h2>
+                                    <br>
+
+                                    <% if(Pitanja!=undefined){%>
+                                    <div class="panel-group">
+                                        <div class="panel panel-default">
+                                            <% for(var p=0;p<Pitanja.length;p++){%>
+                                            <div>
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <a data-toggle="collapse" href="#collapse<%=p%>"
+                                                            class="list-group-item list-group-item-action d-flex justify-content-between"><%=Pitanja[p].sadrzajpitanja%><span
+                                                                class="badge badge-primary badge-pill"><%=Pitanja[p].odgovori.length%>
+                                                                odgovor<%if(Pitanja[p].odgovori.length!=1){%>a<%}%></span></a>
+                                                    </h4>
+                                                </div>
+
+                                                <div id="collapse<%=p%>" class="panel-collapse collapse">
+                                                    <ul class="list-group">
+                                                        <% if(Pitanja[p].odgovori.length!=0){%>
+
+                                                        <%for (var o=0;o<Pitanja[p].odgovori.length;o++){%>
+                                                        <li class="list-group-item"
+                                                            style="border-color: white;border-width: 2px; background-color:rgb(243, 243, 243);">
+                                                            <strong style="color: rgb(0, 89, 255);">Odgovor veterinara<%if(Pitanja[p].odgovori[o].idveterinara!=null){%>
+                                                                <%=Pitanja[p].odgovori[o].idveterinara.username%><%}%>:</strong>
+                                                            <br>
+                                                            <p><%= Pitanja[p].odgovori[o].sadrzajodgovora%></p>
+                                                        </li>
+                                                        <%}%>
+                                    
+                                                        <%}else{%>
+                                                        <p style="color: rgb(0, 89, 255);">Jos uvek nema odgovora na ovo
+                                                            pitanje.</p>
+                                                        <%}%>
+                                    
+                                </ul>                           
+                              </div>
+                        </div>
+                                            <%}%>
+                                                </div>
+                                            </div>
+                                            <%}else{%>
+                                            <p class='list-group-item lead' style="color: rgb(0, 89, 255);">Nema
+                                                postavljenih pitanja.</p>
+                                            <%}%>
+                                        <%}%>
+                                        </div>
+                                        <div style='width:90%;margin:0 auto;'>
+                                            <%if(user!=undefined && user.tipkorisnika == "administrator"){%>
+
+                                            <br>
+                                            <h2 style="color: rgb(0, 89, 255);">Postavljena pitanja:</h2>
+                                            <br>
+
+                                            <% if(Pitanja!=undefined){%>
+                                            <div class="panel-group">
+                                                <div class="panel panel-default">
+                                                    <% for(var p=0;p<Pitanja.length;p++){%>
+                                                    <div>
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <a data-toggle="collapse" href="#collapse<%=p%>"
+                                                                    title="Klikni za prikaz/sakrivanje odgovora"
+                                                                    class="list-group-item list-group-item-action d-flex justify-content-between"><%=Pitanja[p].sadrzajpitanja%>
+                                                                    <div class="row"><span
+                                                                            class="badge badge-primary badge-pill"><%=Pitanja[p].odgovori.length%>
+                                                                            odgovor<%if(Pitanja[p].odgovori.length!=1){%>a<%}%></span>
+                                                                        <%if (user.odobren==1){%>
+                                                                        <button type="button" class='btn btn-danger'
+                                                                            data-toggle="modal"
+                                                                            data-target="#myModal<%=p%>"
+                                                                            style="margin-left: 5px;"><svg
+                                                                                class="bi bi-trash" width="1em"
+                                                                                height="1em" viewBox="0 0 16 16"
+                                                                                fill="currentColor"
+                                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                                <path
+                                                                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                                                                <path fill-rule="evenodd"
+                                                                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                                                            </svg></button>
+                                                                        <%}%>
+                                                                    </div>
+                                                                </a>
+                                                            </h4>
+                                                        </div>
+
+                                                        <div class="modal" id="myModal<%=p%>" tabindex="-1"
+                                                                        role="dialog">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title">Brisanje
+                                                                                        pitanja</h5>
+                                                                                    <button type="button" class="close"
+                                                                                        data-dismiss="modal"
+                                                                                        aria-label="Close">
+                                                                                        <span
+                                                                                            aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <p>Da li ste sigurni da zelite da
+                                                                                        obrisete ovo
+                                                                                        pitanje?</p>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <button type="button"
+                                                                                        class="btn btn-secondary"
+                                                                                        data-dismiss="modal">Odustani</button>
+                                                                                    <form method='post'
+                                                                                        action='/forum/izbrisipitanje/<%=Pitanja[p]._id%>?_method=DELETE'>
+                                                                                        <button type="submit"
+                                                                                            class="btn btn-danger">Izbrisi</button>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div id="collapse<%=p%>"
+                                                                        class="panel-collapse collapse">
+                                                                        <ul class="list-group">
+                                                                            <% if(Pitanja[p].odgovori.length!=0){%>
+
+                                                                            <%for (var o=0;o<Pitanja[p].odgovori.length;o++){%>
+                                                                            <div>
+                                                                                <li class="list-group-item"
+                                                                                    style="border-color: white;border-width: 1px; background-color:rgb(243, 243, 243);">
+                                                                                    <strong
+                                                                                        style="color: rgb(0, 89, 255);">Odgovor
+                                                                                        veterinara<%if(Pitanja[p].odgovori[o].idveterinara!=null){%>
+                                                                                        <%=Pitanja[p].odgovori[o].idveterinara.username%><%}%>:</strong>
+                                                                                    <%if (user.odobren==1){%>
+                                                                                    <button style="float:right;"
+                                                                                        type="button"
+                                                                                        class='btn btn-danger'
+                                                                                        data-toggle="modal"
+                                                                                        data-target="#myModal<%=p%><%=o%>"><svg
+                                                                                            class="bi bi-trash"
+                                                                                            width="1em" height="1em"
+                                                                                            viewBox="0 0 16 16"
+                                                                                            fill="currentColor"
+                                                                                            xmlns="http://www.w3.org/2000/svg">
+                                                                                            <path
+                                                                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                                                                            <path fill-rule="evenodd"
+                                                                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                                                                        </svg></button>
+                                                                                    <%}%>
+                                                                        <p><%= Pitanja[p].odgovori[o].sadrzajodgovora%>
+                                                                                    </p>
+                                                                            </div>
+
+
+
+                                                                            <div class="modal" id="myModal<%=p%><%=o%>"
+                                                                                tabindex="-1" role="dialog">
+                                                                                <div class="modal-dialog"
+                                                                                    role="document">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <h5 class="modal-title">
+                                                                                                Brisanje
+                                                                                                odgovora</h5>
+                                                                                            <button type="button"
+                                                                                                class="close"
+                                                                                                data-dismiss="modal"
+                                                                                                aria-label="Close">
+                                                                                                <span
+                                                                                                    aria-hidden="true">&times;</span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <p>Da li ste sigurni da
+                                                                                                zelite da
+                                                                                                obrisete ovaj odgovor?
+                                                                                            </p>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button"
+                                                                                                class="btn btn-secondary"
+                                                                                                data-dismiss="modal">Odustani</button>
+                                                                                            <form method='post'
+                                                                                                action='/forum/izbrisiodgovor/<%=Pitanja[p]._id%>/<%=Pitanja[p].odgovori[o]._id%>?_method=DELETE'>
+                                                                                                <button type="submit"
+                                                                                                    class="btn btn-danger">Izbrisi</button>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <%}%>
+                                    
+                                                                <%}else{%>
+                                                                            <p style="color: rgb(0, 89, 255);">Jos uvek
+                                                                                nema
+                                                                                odgovora na ovo pitanje.</p>
+                                                                            <%}%>
+                                    
+                                </ul>                           
+                              </div>
+                        </div>
+
+
+
+
+                        <%}%>
+                                                                    </div>
+                                                        </div>
+                                                        <%}else{%>
+                                                        <p class='list-group-item lead' style="color: rgb(0, 89, 255);">
+                                                            Nema
+                                                            postavljenih pitanja.</p>
+                                                        <%}%>
+                                       
+                <%}%>
+                                                    </div>
+                                                </div>
+
+                                                <%- include ('partials/footer.ejs'); %>
+
+                                                <script src="" async defer></script>
+</body>
+
+</html>

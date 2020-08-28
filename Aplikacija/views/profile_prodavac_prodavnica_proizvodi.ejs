@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href="/styles1.css"/>
+    <link rel="stylesheet" href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' />
+</head>
+
+<body>
+    <%- include('partials/navbar.ejs'); %>
+    <input style="display:none" id="brojka" value="<%=Math.ceil(proizvodi.length/broj)%>" />
+    <div class='container'>
+        <ul>
+            <div class='jumbotron'>
+                <h1>Stranica o proizvodima u prodavnici: <%= prodavnica.ime %></h1>
+            </div>
+
+            <a href='/prodavnica/<%=prodavnica._id%>/addproduct' class='btn btn-primary'>Dodaj novi proizvod</a>
+            <hr>
+            <% if((proizvodi==undefined || proizvodi.length==0)&& query==0) {%>
+            <h4>Trenutno Nema proizvoda u ovoj prodavnici</h4>
+            <%}else{%>
+
+            <div class='row'>
+
+                <div class='col-md-12'>
+                    <br>
+                    <form method='get' style='display:inline' action="/profile/prodavac/prodavnica/<%=prodavnica._id%>/proizvodi">
+                        <select name="kategorijafilter">
+                            <option value='0' disabled hidden>Filtriranje po kategoriji</option>
+                            <option>Psi</option>
+                            <option>Macke</option>
+                            <option>Ptice</option>
+                            <option>Male zivotinje</option>
+                        </select>
+                        <select name="tipfilter">
+                            <option value='0' disabled hidden>Filtriranje po tipu</option>
+                            <option>Zivotinja</option>
+                            <option>Hrana</option>
+                            <option>Poslastice</option>
+                            <option>Higijena</option>
+                            <option>Igracke</option>
+                        </select>
+                        <select name="brojfilter">
+                            <option value='0' disabled hidden>Broj proizvoda po strani</option>
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option>100</option>
+                            <option value='6'>Prikaži sve</option>
+                        </select>
+                        <select name="sortfilter">
+                            <option value='0' disabled hidden>Sortiranje</option>
+                            <option value='1'>Cena(manja-veća)</option>
+                            <option value='2'>Cena(veća-manja)</option>
+                            <option value='3'>Naziv(A-Z)</option>
+                            <option value='4'>Naziv(Z-A)</option>
+                            <option value='5'>Datum dodavanja(noviji-stariji)</option>
+                            <option value='6'>Datum dodavanja(stariji-noviji)</option>
+                        </select>
+                        <a  class='iks popup' style='margin-right:0.5%;margin-left: 0.5%;color:#808080' onmouseover="myFunction()" onmouseout="myFunction()" href='/profile/prodavac/prodavnica/<%=prodavnica._id%>/proizvodi' style='margin-top:5px;'><svg class="bi bi-x-square" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                        <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                        <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+                      </svg> <span id='myPopup' class='popuptext'>Ukloni filtere</span></a>
+                     
+                        <button class="btn btn-info" style='margin-top:5px;'>Filtriranje <svg class="bi bi-search"
+                                width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                <path fill-rule="evenodd"
+                                    d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                            </svg></button>
+                    </form>
+                    <h4>
+                        <hr>Dostupni proizvodi u prodavnici:</h4>
+                    <br>
+                    <% for(var i=0;i<Math.floor(proizvodi.length/broj);i++){%>
+                    <div class='row text-center' id="page<%=i+1%>">
+                        <% for(var j=1;j<=broj;j++) {%>
+                        <div class='col-lg-3 col-sm-4 col-xs-6'>
+                            <h5><%= proizvodi[i*broj+j-1].ime %></h5>
+                            <div class="omotac">
+                                <img class='img-thumbnail img-fluid' src="<%=proizvodi[i*broj+j-1].url %>"></img>
+                            </div>
+                            <h6>Cena:</h6>
+                            <p class='priceblack'>
+                                <% if(proizvodi[i*broj+j-1].akcija==true) {%>
+                                <span class='price'
+                                    style='text-decoration: line-through;'><%=proizvodi[i*broj+j-1].cena%></span>
+                                <%=proizvodi[i*broj+j-1].akcijskacena%> din
+
+                                <%}else{%>
+                                <%=proizvodi[i*broj+j-1].cena%> din
+                                <%}%>
+                        </p>
+                        <a href='/products/<%=proizvodi[i*broj+j-1]._id%>' class=' btn-small btn-info btn-block'
+                                style='margin-top: 5px;'>Više informacija</a>
+                        </div>
+                        <%}%>
+                    </div>
+                    <%}%>
+
+                        <div class='row text-center' id="page<%=Math.floor(proizvodi.length/broj)+1%>">
+                            <% for(var j=1;j<=proizvodi.length-Math.floor(proizvodi.length/broj)*broj;j++) {%>
+                            <div class='col-lg-3 col-sm-4 col-xs-6'>
+                                <h5><%= proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1].ime %></h5>
+                                <div class="omotac">
+                                    <img class='img-thumbnail img-fluid'
+                                        src="<%=proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1].url %>"></img>
+                                </div>
+                                <h6>Cena:</h6>
+                                <p class='priceblack'>
+                                    <% if(proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1].akcija==true) {%>
+                                    <span class='price'
+                                        style='text-decoration: line-through;'><%=proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1].cena%></span>
+                                    <%=proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1].akcijskacena%> din
+
+                                    <%}else{%>
+                                    <%=proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1].cena%> din
+                                    <%}%>
+                            </p>
+                            <a href='/products/<%=proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1]._id%>'
+                                    class=' btn-small btn-info btn-block' style='margin-top: 5px;'>Više
+                                    informacija</a>
+
+                                <form method='get'
+                                    action='/profile/prodavac/prodavnica/<%=prodavnica._id%>/proizvodi/<%=proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1]._id%>/edit'>
+                                    <button class="btn-small btn-info btn-block" style='margin-top: 5px;'>Izmeni
+                                        podatke</button>
+                                </form>
+                                <td><button class="btn-danger btn-block btn-small" style='margin-top: 5px;'
+                                        data-toggle="modal"
+                                        data-target="#myModalObrisiProizvod<%= proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1]._id %>">Ukloni
+                                        proizvod</button>
+                                </td>
+                            </div>
+                            <!-- pocetak modala -->
+                            <div class="modal"
+                                id="myModalObrisiProizvod<%= proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1]._id %>"
+                                tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Brisanje proizvoda
+                                                <%= proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1].ime %>
+                                            </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Da li ste sigurni da zelite da izbrišete proizvod?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Odustani</button>
+                                            <form method='post'
+                                                action='/profile/prodavac/prodavnica/<%=prodavnica._id%>/proizvodi/<%=proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1]._id%>?_method=DELETE'>
+                                                <button type="submit" class="btn btn-danger">Izbriši</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- kraj modala -->
+                            <%}%>  
+                            </div>
+                        </div>
+                        <%}%>
+                    </div>
+            <br>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" id="previous"  tabindex="-1" href="#" aria-disabled="true">Prethodna strana</a>
+                    </li>
+                    <% for(var i=0;i<Math.ceil(proizvodi.length/broj);i++){%>
+                        <li class="page-item"><a id="link<%=i+1%>" class="page-link" href="#"><%=i+1%></a></li>
+                        <%}%>
+                <li class="page-item">
+                <a class="page-link" id="next" href="#" >Naredna strana</a>
+                </li>
+                </ul>
+           </nav>   
+        </div>
+
+    </div>
+    </div>  </ul>
+    </div>
+    <!-- vrednosti za prosledjivanje js-u sa servera -->
+    <input type='hidden' name='par1' value="<%=kategorija%>" />
+                        <input type='hidden' name='par2' value="<%=tip%>" />
+                        <input type='hidden' name='par3' value="<%=broj%>" />
+                        <input type='hidden' name='par4' value="<%=sort%>" />
+                        <script src="/search.js"></script>
+                        <%- include ('partials/footer.ejs'); %>

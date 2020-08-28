@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='stylesheet' href='/cart.css'/>
+</head>
+
+<body>
+  <%- include ('partials/navbar.ejs')%>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-md-3'>
+        <p class='lead'>Kategorije</p>
+        <!-- <div class='list-group'> -->
+        <div id='accordion'>
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                  aria-controls="collapseOne">
+                  <img src='/dog.png'> </img>Psi
+                </button>
+              </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+              <li class='list-group-item'><a href='/products/show/Psi'>Sve za pse</a></li>
+              <li class='list-group-item'><a href='/products/show/Psi/Poslastice'>Poslastice</a></li>
+              <li class='list-group-item'><a href='/products/show/Psi/Zivotinja'>Životinja</a></li>
+              <li class='list-group-item'><a href='/products/show/Psi/Hrana'>Hrana</a></li>
+              <li class='list-group-item'><a href='/products/show/Psi/Higijena'>Higijena</a></li>
+              <li class='list-group-item'><a href='/products/show/Psi/Igracke'>Igračke</a></li>
+
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingOne2">
+              <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true"
+                  aria-controls="collapseOne2">
+                  <img src='/cat.png'> </img> Macke
+                </button>
+              </h5>
+            </div>
+
+            <div id="collapseOne2" class="collapse " aria-labelledby="headingOne2" data-parent="#accordion">
+              <li class='list-group-item'><a href='/products/show/Macke'>Sve za mačke</a></li>
+              <li class='list-group-item'><a href='/products/show/Macke/Poslastice'>Poslastice</a></li>
+              <li class='list-group-item'><a href='/products/show/Macke/Zivotinja'>Životinja</a></li>
+              <li class='list-group-item'><a href='/products/show/Macke/Hrana'>Hrana</a></li>
+              <li class='list-group-item'><a href='/products/show/Macke/Higijena'>Higijena</a></li>
+              <li class='list-group-item'><a href='/products/show/Macke/Igracke'>Igračke</a></li>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingOne3">
+              <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="true"
+                  aria-controls="collapseOne3">
+                  <img src='/parrot.png'> </img>Ptice
+                </button>
+              </h5>
+            </div>
+
+            <div id="collapseOne3" class="collapse " aria-labelledby="headingOne3" data-parent="#accordion">
+              <li class='list-group-item'><a href='/products/show/Ptice'>Sve za ptice</a></li>
+              <li class='list-group-item'><a href='/products/show/Ptice/Poslastice'>Poslastice</a></li>
+              <li class='list-group-item'><a href='/products/show/Ptice/Zivotinja'>Životinja</a></li>
+              <li class='list-group-item'><a href='/products/show/Ptice/Hrana'>Hrana</a></li>
+              <li class='list-group-item'><a href='/products/show/Ptice/Higijena'>Higijena</a></li>
+              <li class='list-group-item'><a href='/products/show/Ptice/Igracke'>Igračke</a></li>
+
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingOne4">
+              <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne4" aria-expanded="true"
+                  aria-controls="collapseOne4">
+                  <img src='/hamster.png'> </img>Male životinje
+                </button>
+              </h5>
+            </div>
+
+            <div id="collapseOne4" class="collapse " aria-labelledby="headingOne4" data-parent="#accordion">
+              <li class='list-group-item'><a href='/products/show/Male Zivotinje'>Sve za male životinje</a></li>
+              <li class='list-group-item'><a href='/products/show/Male Zivotinje/Poslastice'>Poslastice</a></li>
+              <li class='list-group-item'><a href='/products/show/Male Zivotinje/Zivotinja'>Životinja</a></li>
+              <li class='list-group-item'><a href='/products/show/Male Zivotinje/Hrana'>Hrana</a></li>
+              <li class='list-group-item'><a href='/products/show/Male Zivotinje/Higijena'>Higijena</a></li>
+              <li class='list-group-item'><a href='/products/show/Male Zivotinje/Igracke'>Igračke</a></li>
+
+            </div>
+          </div>
+          <!-- </div> -->
+          <br>
+                    <li class='list-group-item'><a href='/shop' style='font-weight: 500;'>Prodavnice u našoj mreži</a></li>
+        </div>
+      </div>
+      <div class='col-md-9'>
+        <h1>Prikaz više informacija o proizvodu</h1>
+        <div class='img-thumbnail'>
+          <div class='row'>
+            <div class='col-md-4'>
+              <h5 style='text-align: center;'><%= proizvod.ime %></h5>
+
+              <span style='width:1000px;height:1000px'>
+                <img class='img-responsive img-thumbnail img-fluid' style='max-width: 100%;max-height: 100%;'
+                  src="<%=proizvod.url %>"></img>
+
+              </span>
+            </div>
+            <div class='col-md-8'>
+              <br>
+              <div class='caption-full'>
+                <strong>Kategorija:</strong>
+                <% if(proizvod.kategorija){ %>
+                <%= proizvod.kategorija %>
+                <% } else{ %>
+                <p>Nema kategorije za prikazani proizvod</p>
+                <% } %>
+              </div>
+              <div class='caption-full'>
+                <strong>Tip:</strong>
+                <% if(proizvod.tip){ %>
+                <%= proizvod.tip %>
+                <% } else{ %>
+                <p>Nema tipa za prikazani proizvod</p>
+                <% } %>
+              </div>
+              <div class='caption-full'>
+                <strong>Dostupno:</strong>
+                <% if(proizvod.kolicina>0){ %>
+                <%= proizvod.kolicina %>
+                <% } else{ %>
+                <p>Proizvod trenutno nije dostupan</p>
+                <% } %>
+              </div>
+              <p class='priceblack'>
+                <strong style='color:#212529'>Cena:</strong>
+                <% if(proizvod.akcija==true) {%>
+                <span class='price' style='text-decoration: line-through;'><%=proizvod.cena%></span>
+                <%=proizvod.akcijskacena%> din
+
+                <%}else{%>
+                <%=proizvod.cena%> din
+                <%}%>
+              </p>
+              <div id='tu'></div>
+              <form method='post' action="/cart/<%=proizvod._id%>/2">
+                <button class='btn btn-small btn-success korpa' name='<%=proizvod._id%>' style='margin-top: 5px;'>Dodaj
+                  u
+                  korpu</button>
+                </form>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class='jumbotron'>
+          <strong>Opis:</strong>
+          <% if(proizvod.opis){ %>
+          <%= proizvod.opis %>
+          <% } else{ %>
+          <p>Nema opisa za prikazani proizvod</p>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KORPA -->
+  <% if (typeof proizvod != "undefined") { %>
+  <!-- make user available to script tag -->
+  <% var proizvod = proizvod; %>
+  <!-- use script tag to access ejs data and local storage -->
+  <script>
+    let proizvod =  <%- JSON.stringify(proizvod) %> ;
+    var elementi = document.getElementsByClassName("korpa");
+    elementi[0].addEventListener("click",async function () {
+      var x=await funkcija();
+      console.log(x);
+      if (localStorage.getItem(`${proizvod._id}`) != null) {
+        localStorage.setItem(`broj${proizvod._id}`, parseInt(localStorage.getItem(`broj${proizvod._id}`)) + parseInt(x));
+      }
+      else {
+        localStorage.setItem(`${proizvod._id}`, JSON.stringify(proizvod));
+        localStorage.setItem(`broj${proizvod._id}`, parseInt(x));
+      }
+    })   
+  </script>
+  <% } %>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src='/searchproduct.js'></script>
+
+  <%- include ('partials/footer.ejs'); %>

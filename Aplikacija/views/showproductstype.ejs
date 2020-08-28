@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' />
+    <link rel='stylesheet' href='/styles1.css'/>
+</head>
+
+<body>
+    <%- include('partials/navbar.ejs'); %>
+    <input style="display:none" id="brojka" value="<%=Math.ceil(proizvodi.length/broj)%>" />
+    <div class='container'>
+        <div class='row'>
+            <div class='col-md-3'>
+                <p class='lead'>Kategorije</p>
+                <!-- <div class='list-group'> -->
+                <div id='accordion'>
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                                    aria-expanded="true" aria-controls="collapseOne">
+                                    <img src='/dog.png'> </img>Psi
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+                            <li class='list-group-item'><a href='/products/show/Psi'>Sve za pse</a></li>
+                            <li class='list-group-item'><a href='/products/show/Psi/Poslastice'>Poslastice</a></li>
+                            <li class='list-group-item'><a href='/products/show/Psi/Zivotinja'>Zivotinja</a></li>
+                            <li class='list-group-item'><a href='/products/show/Psi/Hrana'>Hrana</a></li>
+                            <li class='list-group-item'><a href='/products/show/Psi/Higijena'>Higijena</a></li>
+                            <li class='list-group-item'><a href='/products/show/Psi/Igracke'>Igracke</a></li>
+
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingOne2">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne2"
+                                    aria-expanded="true" aria-controls="collapseOne2">
+                                    <img src='/cat.png'> </img>Macke
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="collapseOne2" class="collapse " aria-labelledby="headingOne2" data-parent="#accordion">
+                            <li class='list-group-item'><a href='/products/show/Macke'>Sve za macke</a></li>
+                            <li class='list-group-item'><a href='/products/show/Macke/Poslastice'>Poslastice</a></li>
+                            <li class='list-group-item'><a href='/products/show/Macke/Zivotinja'>Zivotinja</a></li>
+                            <li class='list-group-item'><a href='/products/show/Macke/Hrana'>Hrana</a></li>
+                            <li class='list-group-item'><a href='/products/show/Macke/Higijena'>Higijena</a></li>
+                            <li class='list-group-item'><a href='/products/show/Macke/Igracke'>Igracke</a></li>
+
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingOne3">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne3"
+                                    aria-expanded="true" aria-controls="collapseOne3">
+                                    <img src='/parrot.png'> </img>Ptice
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="collapseOne3" class="collapse " aria-labelledby="headingOne3" data-parent="#accordion">
+                            <li class='list-group-item'><a href='/products/show/Ptice'>Sve za ptice</a></li>
+                            <li class='list-group-item'><a href='/products/show/Ptice/Poslastice'>Poslastice</a></li>
+                            <li class='list-group-item'><a href='/products/show/Ptice/Zivotinja'>Zivotinja</a></li>
+                            <li class='list-group-item'><a href='/products/show/Ptice/Hrana'>Hrana</a></li>
+                            <li class='list-group-item'><a href='/products/show/Ptice/Higijena'>Higijena</a></li>
+                            <li class='list-group-item'><a href='/products/show/Ptice/Igracke'>Igracke</a></li>
+
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingOne4">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne4"
+                                    aria-expanded="true" aria-controls="collapseOne4">
+                                    <img src='/hamster.png'> </img>Male zivotinje
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="collapseOne4" class="collapse " aria-labelledby="headingOne4" data-parent="#accordion">
+                            <li class='list-group-item'><a href='/products/show/Male Zivotinje'>Sve za male
+                                    zivotinje</a></li>
+                            <li class='list-group-item'><a
+                                    href='/products/show/Male Zivotinje/Poslastice'>Poslastice</a></li>
+                            <li class='list-group-item'><a href='/products/show/Male Zivotinje/Zivotinja'>Zivotinja</a>
+                            </li>
+                            <li class='list-group-item'><a href='/products/show/Male Zivotinje/Hrana'>Hrana</a></li>
+                            <li class='list-group-item'><a href='/products/show/Male Zivotinje/Higijena'>Higijena</a>
+                            </li>
+                            <li class='list-group-item'><a href='/products/show/Male Zivotinje/Igracke'>Igracke</a></li>
+
+                        </div>
+                    </div>
+                    <!-- </div> -->
+
+                </div>
+                <br>
+                    <li class='list-group-item'><a href='/shop' style='font-weight: 500;'>Prodavnice u našoj mreži</a></li>
+            </div>
+
+            <div class='col-md-9'>
+                <br>
+                <% if(proizvodi.length>0) {%>
+                <h4> Izabrana kategorija: <%= proizvodi[0].kategorija%>, tip: <%=proizvodi[0].tip%></h4>
+                <%}else{%>
+                <h4> Nema proizvoda za izabrani tip u ovoj kategoriji</h4>
+                <%}%>
+                    <hr>
+                    <form method='get' action="/products/show/<%=kategorija%>/<%=tip%>">
+                    <select name='prodavnicafilter'>
+                        <option value='0' disabled hidden selected > Izbor prodavnice</option>
+                        <% for(var i=0;i<prodavnicee.length;i++){%>
+                <option><%=prodavnicee[i].ime%></option>
+                <%}%>
+                    </select>
+                   
+                    <select name="brojfilter">
+                        <option value='0' disabled hidden >Broj proizvoda po strani</option>
+                        <option >5</option>
+                        <option >10</option>
+                        <option >20</option>
+                        <option >50</option>
+                        <option >100</option>
+                        <option value='6'>Prikazi sve</option>
+                      </select>
+                      <select name="sortfilter">
+                        <option value='0'disabled hidden >Sortiranje</option>
+                        <option value='1'>Cena(manja-veća)</option>
+                        <option value='2'>Cena(veća-manja)</option>
+                        <option value='3'>Naziv(A-Z)</option>
+                        <option value='4'>Naziv(Z-A)</option>
+                        <option value='5'>Datum dodavanja(noviji-stariji)</option>
+                        <option value='6'>Datum dodavanja(stariji-noviji)</option>
+                      </select>
+                      <a  class='iks popup' style='margin-right:0.5%;margin-left: 0.5%;color:#808080' onmouseover="myFunction()" onmouseout="myFunction()" href='/products/show/<%=kategorija%>/<%=tip%>' style='margin-top:5px;'><svg class="bi bi-x-square" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                        <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                        <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+                      </svg> <span id='myPopup' class='popuptext'>Ukloni filtere</span></a>
+                      <button class="btn btn-info" style='margin-top:5px;'>Filtriranje <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                      </svg></button>
+                    </form>
+                    <hr>
+                    <% for(var i=0;i<Math.floor(proizvodi.length/broj);i++){%>
+                <div class='row text-center' id="page<%=i+1%>">
+                    <% for(var j=1;j<=broj;j++) {%>
+                    <div class='col-lg-3 col-sm-4 col-xs-6'>
+                        <h5><%= proizvodi[i*broj+j-1].ime %></h5>
+                        <div class="omotac">
+                            <img class='img-thumbnail img-fluid' src="<%=proizvodi[i*broj+j-1].url %>"></img>
+                        </div>
+                        <h6>Cena:</h6>
+                        <p class='priceblack'>
+                            <% if(proizvodi[i*broj+j-1].akcija==true) {%>
+                            <span class='price'
+                                style='text-decoration: line-through;'><%=proizvodi[i*broj+j-1].cena%></span>
+                            <%=proizvodi[i*broj+j-1].akcijskacena%> din
+
+                            <%}else{%>
+                            <%=proizvodi[i*broj+j-1].cena%> din
+                            <%}%>
+                            </p>
+                            <a href='/products/<%=proizvodi[i*broj+j-1]._id%>' class=' btn-small btn-info btn-block'
+                            style='margin-top: 5px;'>Više informacija</a>
+                        <form method='post' action="/cart/<%=proizvodi[i*broj+j-1]._id%>/1">
+                            <button class=' btn-small btn-success btn-block korpa' name='<%=proizvodi[i*broj+j-1]._id%>'
+                                style='margin-top: 5px;'>Dodaj u korpu</button>
+                        </form>
+                    </div>
+                    <%}%>
+                    </div>
+                    <%}%>
+                    <div class='row text-center' id="page<%=Math.floor(proizvodi.length/broj)+1%>">
+                        <% for(var j=1;j<=proizvodi.length-Math.floor(proizvodi.length/broj)*broj;j++) {%>
+                        <div class='col-lg-3 col-sm-4 col-xs-6'>
+                            <h5><%= proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1].ime %></h5>
+                            <div class="omotac">
+                                <img class='img-thumbnail img-fluid'
+                                    src="<%=proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1].url %>"></img>
+                            </div>
+                            <h6>Cena:</h6>
+                            <p class='priceblack'>
+                                <% if(proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1].akcija==true) {%>
+                                <span class='price'
+                                    style='text-decoration: line-through;'><%=proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1].cena%></span>
+                                <%=proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1].akcijskacena%> din
+
+                                <%}else{%>
+                                <%=proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1].cena%> din
+                                <%}%>
+                                </p>
+                                <a href='/products/<%=proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1]._id%>'
+                                class=' btn-small btn-info btn-block' style='margin-top: 5px;'>Više informacija</a>
+                            <form method='post'
+                                action="/cart/<%=proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1]._id%>/1">
+                                <button class=' btn-small btn-success btn-block korpa'
+                                    name='<%=proizvodi[Math.floor(proizvodi.length/broj)*broj+j-1]._id%>'
+                                    style='margin-top: 5px;'>Dodaj u korpu</button>
+                            </form>
+                        </div>
+                        <%}%>
+                        </div>
+                <br>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" id="previous"  tabindex="-1" href="#" aria-disabled="true">Prethodna strana</a>
+                        </li>
+                        <% for(var i=0;i<Math.ceil(proizvodi.length/broj);i++){%>
+                        <li class="page-item"><a id="link<%=i+1%>" class="page-link" href="#"><%=i+1%></a></li>
+                        <%}%>
+                    <li class="page-item">
+                    <a class="page-link" id="next" href="#" >Naredna strana</a>
+                    </li>
+                    </ul>
+               </nav>   
+            </div>
+    
+        </div>
+        </div>
+        <!-- vrednosti za prosledjivanje js-u sa servera -->
+        <input type='hidden' name='par1' value="<%=kategorija%>" />
+                        <input type='hidden' name='par2' value="<%=tip%>" />
+                        <input type='hidden' name='par3' value="<%=broj%>" />
+                        <input type='hidden' name='par4' value="<%=sort%>" />
+                        <input type='hidden' name='par5' value="<%=prod%>" />
+                        <% if (typeof proizvodi != "undefined") { %>
+                        <!-- make user available to script tag -->
+                        <% var proizvodi = proizvodi %>
+
+                        <!-- use script tag to access ejs data and local storage -->
+                        <script>
+                            let proizvodi =  <%- JSON.stringify(proizvodi) %> ;
+
+                            var elementi = document.getElementsByClassName("korpa");
+                            for (let i = 0; i < elementi.length; i++) {
+                                elementi[i].addEventListener("click", function () {
+                                    if (localStorage.getItem(`${proizvodi[i]._id}`) != null) {
+                                        localStorage.setItem(`broj${proizvodi[i]._id}`, parseInt(localStorage.getItem(`broj${proizvodi[i]._id}`)) + 1);
+                                    }
+                                    else {
+                                        localStorage.setItem(`${proizvodi[i]._id}`, JSON.stringify(proizvodi[i]));
+                                        localStorage.setItem(`broj${proizvodi[i]._id}`, 1);
+                                    }
+                                })
+                            }   
+                        </script>
+                        <% } %>
+                        <script src="/search.js"></script>
+                        <%- include ('partials/footer.ejs'); %>

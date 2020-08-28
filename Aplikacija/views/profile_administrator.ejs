@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="pom.css">
+     
+    </head>
+    <body>
+        <%- include ('partials/navbar.ejs')%>
+        <div class='container'>
+            <div class='row'>
+                <div class='col-md-3'>
+                    <p class='lead' style="color: rgb(0, 89, 255);">PetCom</p>
+                    <div class='list-group'>
+                        <button id="b8" type="button" class='list-group-item list-group-item-action' data-toggle="list">Prikazi podatke o administratoru</button>
+                        <button id="b1" type="button" class='list-group-item list-group-item-action' data-toggle="list">Prikazi sve veterinare</button>
+                        <button id="b2" type="button" class='list-group-item list-group-item-action' data-toggle="list">Prikazi sve vlasnike</button>
+                        <button id="b3" type="button" class='list-group-item list-group-item-action' data-toggle="list">Prikazi sve prodavce</button>
+                        <button id="b4" type="button" class='list-group-item list-group-item-action' data-toggle="list">Prikazi ostale administratore</button>
+                        <button id="b5" type="button" class='list-group-item list-group-item-action' data-toggle="list">Prikazi neodobrene veterinare</button>
+                        <button id="b6" type="button" class='list-group-item list-group-item-action' data-toggle="list">Prikazi neodobrene prodavce</button>
+                        <button id="b7" type="button" class='list-group-item list-group-item-action' data-toggle="list">Prikazi neodobrene administratore</button>
+                    </div>
+                </div>
+            <div class='col-md-9'>
+                <br>
+                <br>
+                <div id="id1" class='col-md-9'>
+                    <% for(var v of vet) {%>
+                    <dl class="row">
+                        <dt class="col-sm-3">Ime i prezime</dt>
+                        <dd class="col-sm-9"><%= v.ime %> <%= v.prezime %></dd>
+
+                        <dt class="col-sm-3">Telefon</dt>
+                        <dd class="col-sm-9"><%=v.telefon%></dd>
+
+                        <dt class="col-sm-3">Username</dt>
+                        <dd class="col-sm-9"><%= v.username %></dd>
+
+                        <dt class="col-sm-3">Email</dt>
+                        <dd class="col-sm-9"><%= v.email %></dd>
+
+                        <dt class="col-sm-3">Ambulanta</dt>
+                        <dd class="col-sm-9"><%= v.ambulanta %></dd>
+
+                        <dt class="col-sm-3">Adresa</dt>
+                        <dd class="col-sm-9"><%= v.adresa %></dd>
+                        <% if(v.odobren==0){ %>
+                        <dt class="col-sm-3">Odobren:</dt>
+                        <dd class="col-sm-9" style='color:red'>Neodobren</dd>
+                        <%} else{%>
+                        <dt class="col-sm-3">Odobren:</dt>
+                        <dd class="col-sm-9" style='color:green'>Odobren</dd>
+                        <%}%>
+                                <button style="margin-left: 170px; width: 120px;" class="btn btn-danger" data-toggle="modal" data-target="#myModal1<%= v._id %>">Izbrisi</button>
+                    </dl>
+                    <hr>
+                    <!-- pocetak modala -->
+                    <div class="modal" id="myModal1<%= v._id %>" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Brisanje veterinara <%= v.username %></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Da li ste sigurni da zelite da izbrisete korisnika?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Odustani</button>
+                                    <form method='post' action='/profile/veterinar/<%=v._id%>?_method=DELETE'>
+                                        <button type="submit" class="btn btn-danger">Izbrisi</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- kraj modala -->
+                    <%}%>
+                    </div>
+                    <div id="id2" class='col-md-9'>
+                        <% for(var v of vlasnici) {%>
+                    <dl class="row">
+                        <dt class="col-sm-3">Ime i prezime</dt>
+                        <dd class="col-sm-9"><%= v.ime %> <%= v.prezime %></dd>
+
+                        <dt class="col-sm-3">Telefon</dt>
+                        <dd class="col-sm-9"><%=v.telefon%></dd>
+
+                        <dt class="col-sm-3">Username</dt>
+                        <dd class="col-sm-9"><%= v.username %></dd>
+
+                        <dt class="col-sm-3">Email</dt>
+                        <dd class="col-sm-9"><%= v.email %></dd>
+                        <% if(v.odobren==0){ %>
+                        <dt class="col-sm-3">Odobren:</dt>
+                        <dd class="col-sm-9" style='color:red'>Neodobren</dd>
+                        <%} else{%>
+                        <dt class="col-sm-3">Odobren:</dt>
+                        <dd class="col-sm-9" style='color:green'>Odobren</dd>
+                        <%}%>
+                                <button style="margin-left: 170px; width: 120px;" class="btn btn-danger" data-toggle="modal" data-target="#myModal2<%= v._id %>">Izbrisi</button>
+                    </dl>
+                    <hr>
+                    <!-- pocetak modala -->
+                    <div class="modal" id="myModal2<%= v._id %>" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Brisanje vlasnika <%= v.username %></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Da li ste sigurni da zelite da izbrisete korisnika?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Odustani</button>
+                                    <form method='post' action='/profile/vlasnik/<%=v._id%>?_method=DELETE'>
+                                        <button type="submit" class="btn btn-danger">Izbrisi</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- kraj modala -->
+                    <%}%>
+                    </div>
+                    <div id="id3" class='col-md-9'>
+                        <% for(var v of prod) {%>
+                    <dl class="row">
+                        <dt class="col-sm-3">Ime i prezime</dt>
+                        <dd class="col-sm-9"><%= v.ime %> <%= v.prezime %></dd>
+
+                        <dt class="col-sm-3">Telefon</dt>
+                        <dd class="col-sm-9"><%=v.telefon%></dd>
+
+                        <dt class="col-sm-3">Username</dt>
+                        <dd class="col-sm-9"><%= v.username %></dd>
+
+                        <dt class="col-sm-3">Email</dt>
+                        <dd class="col-sm-9"><%= v.email %></dd>
+                        <% if(v.odobren==0){ %>
+                        <dt class="col-sm-3">Odobren:</dt>
+                        <dd class="col-sm-9" style='color:red'>Neodobren</dd>
+                        <%} else{%>
+                        <dt class="col-sm-3">Odobren:</dt>
+                        <dd class="col-sm-9" style='color:green'>Odobren</dd>
+                        <%}%>
+                                <button style="margin-left: 170px; width: 120px;" class="btn btn-danger" data-toggle="modal" data-target="#myModal3<%= v._id %>">Izbrisi</button>
+                    </dl>
+                    <hr>
+                    <!-- pocetak modala -->
+                    <div class="modal" id="myModal3<%= v._id %>" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Brisanje prodavca <%= v.username %></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Da li ste sigurni da zelite da izbrisete korisnika?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Odustani</button>
+                                    <form method='post' action='/profile/prodavac/<%=v._id%>?_method=DELETE'>
+                                        <button type="submit" class="btn btn-danger">Izbrisi</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- kraj modala -->
+                    <%}%>
+                    </div>
+                    <div id="id4" class='col-md-9'>
+                        <% for(var v of adm) {%>
+                    <dl class="row">
+                        <dt class="col-sm-3">Ime i prezime</dt>
+                        <dd class="col-sm-9"><%= v.ime %> <%= v.prezime %></dd>
+
+                        <dt class="col-sm-3">Telefon</dt>
+                        <dd class="col-sm-9"><%=v.telefon%></dd>
+
+                        <dt class="col-sm-3">Username</dt>
+                        <dd class="col-sm-9"><%= v.username %></dd>
+
+                        <dt class="col-sm-3">Email</dt>
+                        <dd class="col-sm-9"><%= v.email %></dd>
+                        <% if(v.odobren==0){ %>
+                        <dt class="col-sm-3">Odobren:</dt>
+                        <dd class="col-sm-9" style='color:red'>Neodobren</dd>
+                        <%} else{%>
+                        <dt class="col-sm-3">Odobren:</dt>
+                        <dd class="col-sm-9" style='color:green'>Odobren</dd>
+                        <%}%>
+                        
+                                <button style="margin-left: 170px; width: 120px;" class="btn btn-danger" data-toggle="modal" data-target="#myModal4<%= v._id %>">Izbrisi</button>
+                    </dl>
+                    <hr>
+                    <!-- pocetak modala -->
+                    <div class="modal" id="myModal4<%= v._id %>" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Brisanje administratora <%= v.username %></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Da li ste sigurni da zelite da izbrisete korisnika?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Odustani</button>
+                                    <form method='post' action='/profile/administrator/<%=v._id%>?_method=DELETE'>
+                                        <button type="submit" class="btn btn-danger">Izbrisi</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- kraj modala -->
+                    <%}%>
+                    </div>
+                    <div id="id5" class='col-md-9'>
+                        <% for(var v of nevet) {%>
+                    <dl class="row">
+                        <dt class="col-sm-3">Ime i prezime</dt>
+                        <dd class="col-sm-9"><%= v.ime %> <%= v.prezime %></dd>
+
+                        <dt class="col-sm-3">Telefon</dt>
+                        <dd class="col-sm-9"><%=v.telefon%></dd>
+
+                        <dt class="col-sm-3">Username</dt>
+                        <dd class="col-sm-9"><%= v.username %></dd>
+
+                        <dt class="col-sm-3">Email</dt>
+                        <dd class="col-sm-9"><%= v.email %></dd>
+
+                        <dt class="col-sm-3">Ambulanta</dt>
+                        <dd class="col-sm-9"><%= v.ambulanta %></dd>
+
+                        <dt class="col-sm-3">Adresa</dt>
+                        <dd class="col-sm-9"><%= v.adresa %></dd>
+
+                        <button style="margin-left: 170px; width: 120px;" class="btn btn-success" data-toggle="modal"
+                            data-target="#myModal5<%= v._id %>">Odobri</button>
+                    </dl>
+                    <hr>
+                    <!-- pocetak modala -->
+                    <div class="modal" id="myModal5<%= v._id %>" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Odobravanje veterinara <%= v.username %></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Da li ste sigurni da zelite da odobrite korisnika?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Odustani</button>
+                                    <form method='post' action='/profile/odobrivet/<%=v._id%>?_method=PUT'>
+                                        <button type="submit" class="btn btn-success">Odobri</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- kraj modala -->
+                    <%}%>
+                    </div>
+                    <div id="id6" class='col-md-9'>
+                        <% for(var v of neprod) {%>
+                    <dl class="row">
+                        <dt class="col-sm-3">Ime i prezime</dt>
+                        <dd class="col-sm-9"><%= v.ime %> <%= v.prezime %></dd>
+
+                        <dt class="col-sm-3">Telefon</dt>
+                        <dd class="col-sm-9"><%=v.telefon%></dd>
+
+                        <dt class="col-sm-3">Username</dt>
+                        <dd class="col-sm-9"><%= v.username %></dd>
+
+                        <dt class="col-sm-3">Email</dt>
+                        <dd class="col-sm-9"><%= v.email %></dd>
+
+                        <button style="margin-left: 170px; width: 120px;" class="btn btn-success" data-toggle="modal"
+                            data-target="#myModal6<%= v._id %>">Odobri</button>
+                    </dl>
+                    <hr>
+                    <!-- pocetak modala -->
+                    <div class="modal" id="myModal6<%= v._id %>" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Odobravanje prodavca <%= v.username %></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Da li ste sigurni da zelite da odobrite korisnika?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Odustani</button>
+                                    <form method='post' action='/profile/odobriprod/<%=v._id%>?_method=PUT'>
+                                        <button type="submit" class="btn btn-success">Odobri</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- kraj modala -->
+                    <%}%>
+                    </div>
+                    <div id="id7" class='col-md-9'>
+                        <% for(var v of neadm) {%>
+                    <dl class="row">
+                        <dt class="col-sm-3">Ime i prezime</dt>
+                        <dd class="col-sm-9"><%= v.ime %> <%= v.prezime %></dd>
+
+                        <dt class="col-sm-3">Telefon</dt>
+                        <dd class="col-sm-9"><%=v.telefon%></dd>
+
+                        <dt class="col-sm-3">Username</dt>
+                        <dd class="col-sm-9"><%= v.username %></dd>
+
+                        <dt class="col-sm-3">Email</dt>
+                        <dd class="col-sm-9"><%= v.email %></dd>
+
+                        <button style="margin-left: 170px; width: 120px;" class="btn btn-success" data-toggle="modal"
+                            data-target="#myModal7<%= v._id %>">Odobri</button>
+                    </dl>
+                    <hr>
+                    <!-- pocetak modala -->
+                    <div class="modal" id="myModal7<%= v._id %>" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Odobravanje administratora <%= v.username %></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Da li ste sigurni da zelite da odobrite korisnika?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Odustani</button>
+                                    <form method='post' action='/profile/odobriadm/<%=v._id%>?_method=PUT'>
+                                        <button type="submit" class="btn btn-success">Odobri</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- kraj modala -->
+                    <%}%>
+                    </div>
+                    <div id="id8" class='col-md-9'>
+                        <% if(user!=undefined) {%>
+                    <dl class="row">
+                        <dt class="col-sm-3">Ime i prezime</dt>
+                        <dd class="col-sm-9"><%= user.ime %> <%= user.prezime %></dd>
+
+                        <dt class="col-sm-3">Telefon</dt>
+                        <dd class="col-sm-9"><%=user.telefon%></dd>
+
+                        <dt class="col-sm-3">Username</dt>
+                        <dd class="col-sm-9"><%= user.username %></dd>
+
+                        <dt class="col-sm-3">Email</dt>
+                        <dd class="col-sm-9"><%= user.email %></dd>
+                        <% if(user.odobren==0){ %>
+                        <dt class="col-sm-3">Odobren:</dt>
+                        <dd class="col-sm-9" style='color:red'>Neodobren</dd>
+                        <%} else{%>
+                        <dt class="col-sm-3">Odobren:</dt>
+                        <dd class="col-sm-9" style='color:green'>Odobren</dd>
+                        <%}%>
+                                <button style="margin-left: 170px; width: 150px;" id="btn8" class="btn btn-info" >Izmeni podatke</button>
+                            </dl><hr>
+                        <%}%>
+                </div>
+                <div id="id9" class='col-md-9'>
+                    <% if(user!=undefined) {%>
+                    <form method='post' action='/profile/administrator/edit/<%=user._id%>?_method=PUT'>
+                        <div class="form-group">
+                            <label for="inputIme">Ime:</label>
+                            <input type="text" id="inputIme" class="form-control" name='ime' value="<%=user.ime%>"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPrezime">Prezime:</label>
+                            <input type="text" id="inputPrezime" class="form-control" name='prezime'
+                                value="<%=user.prezime%>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputTelefon">Telefon:</label>
+                            <input type="text" id="inputTelefon" class="form-control" name='telefon'
+                                value="<%=user.telefon%>" pattern="^06\d{7,8}$" title="Morate uneti format telefona." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputUsername">Username:</label>
+                            <input type="text" id="inputUsername" class="form-control" name='username'
+                                value="<%=user.username%>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail">Email:</label>
+                            <input type="email" id="inputEmail" class="form-control" name='email'
+                                value="<%=user.email%>" required>
+                            <small id="emailHelp" class="form-text text-muted">Necemo podeliti vasu adresu ni sa
+                                kim.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword">Nova sifra:</label>
+                            <input type="password" id="inputPassword" class="form-control" name='password2'
+                                placeholder="New Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,}"
+                                title="Mora da sadrzi bar jedan broj, jedno malo slovo, jedno veliko slovo i bar 7 karaktera."
+                                >
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword2">Unesite trenutnu sifru da biste potvrdili promene:</label>
+                            <input type="password" id="inputPassword2" class="form-control" name='password'
+                                placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{7,}"
+                                title="Mora da sadrzi bar jedan broj, jedno malo slovo, jedno veliko slovo i bar 7 karaktera."
+                                required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sacuvaj</button>
+                    </form>
+                    <%}%>
+                    <br>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#myModal<%= user._id %>">Brisanje
+                        naloga</button>
+                    
+                     <!-- pocetak modala -->
+                     <div class="modal" id="myModal<%= user._id %>" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Brisanje administratora <%= user.username %></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Da li ste sigurni da zelite da obrišete Vaš nalog?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+                                <form method='post' action='/profile/administrator/<%=user._id%>?_method=DELETE'>
+                                    <button type="submit" class="btn btn-danger">Izbriši</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- kraj modala -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="pom1.js"></script>
+         <%- include ('partials/footer.ejs'); %>

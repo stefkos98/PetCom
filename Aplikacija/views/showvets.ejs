@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' />
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <%- include('partials/navbar.ejs'); %>
+    <input style="display:none" id="brojka" value="<%=Math.ceil(veterinari.length/broj)%>" />
+    <div class='container'>
+        <div class='jumbotron'>
+            <h1>Dobrodosli na stranicu o veterinarima</h1>
+        </div>
+        <div style="margin-left: 2.5px;" class='row'>
+            <div class='col-md-10'>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Broj veterinara po strani
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/showvets/5">5</a>
+                        <a class="dropdown-item" href="/showvets/10">10</a>
+                        <a class="dropdown-item" href="/showvets/20">20</a>
+                        <a class="dropdown-item" href="/showvets/50">50</a>
+                        <a class="dropdown-item" href="/showvets/100">100</a>
+                    </div>
+                </div>
+                <hr>
+                <% for(var i=0;i<Math.floor(veterinari.length/broj);i++){%>
+                <div class='row text-center' id="page<%=i+1%>">
+                    <% for(var j=1;j<=broj;j++) {%>
+                    <div class='col-lg-3 col-sm-4 col-xs-6'>
+                        <h5 style="color:rgb(0, 110, 255)"><%=veterinari[i*broj+j-1].ambulanta%></h5>
+                        <div class='omotac'>
+                            <p><%=veterinari[i*broj+j-1].ime%> <%=veterinari[i*broj+j-1].prezime%><br>Adresa:
+                                <%=veterinari[i*broj+j-1].adresa%><br>Telefon:
+                                <%=veterinari[i*broj+j-1].telefon%></p>
+                            <a href='/showvets/calendar/<%=veterinari[i*broj+j-1].idrasporeda%>'
+                                class=' btn-small btn-primary btn-block' style='margin-top: 5px;'>Zakazi termin</a>
+                        </div>
+                    </div>
+                    <%}%>
+                </div>
+                <%}%>
+                    <div class='row text-center' id="page<%=Math.floor(veterinari.length/broj)+1%>">
+                        <% for(var j=1;j<=veterinari.length-Math.floor(veterinari.length/broj)*broj;j++) {%>
+                        <div class='col-md-3 col-sm-4 col-xs-6'>
+                            <h5 style="color:rgb(0, 110, 255)">
+                                <%=veterinari[Math.floor(veterinari.length/broj)*broj+j-1].ambulanta%></h5>
+                            <div class='omotac'>
+                                <p><%=veterinari[Math.floor(veterinari.length/broj)*broj+j-1].ime%>
+                                    <%=veterinari[Math.floor(veterinari.length/broj)*broj+j-1].prezime%><br>Adresa:
+                                    <%=veterinari[Math.floor(veterinari.length/broj)*broj+j-1].adresa%><br>Telefon:
+                                    <%=veterinari[Math.floor(veterinari.length/broj)*broj+j-1].telefon%></p>
+                                <a href='/showvets/calendar/<%=veterinari[Math.floor(veterinari.length/broj)*broj+j-1].idrasporeda%>'
+                                    class=' btn-small btn-primary btn-block' style='margin-top: 5px;'>Zakazi termin</a>
+                            </div>
+                        </div>
+                        <%}%>
+                </div>
+                <br>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" id="previous"  tabindex="-1" href="#" aria-disabled="true">Prethodna strana</a>
+                        </li>
+                        <% for(var i=0;i<Math.ceil(veterinari.length/broj);i++){%>
+                        <li class="page-item"><a id="link<%=i+1%>" class="page-link" href="#"><%=i+1%></a></li>
+                        <%}%>
+                    <li class="page-item">
+                    <a class="page-link" id="next" href="#" >Naredna strana</a>
+                    </li>
+                    </ul>
+               </nav>   
+
+                
+            </div>
+        </div>
+    </div>
+    <script src="/search.js"></script>
+        <%- include ('partials/footer.ejs'); %>

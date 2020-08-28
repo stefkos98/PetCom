@@ -1,0 +1,277 @@
+<!DOCTYPE>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' />
+    <link rel="stylesheet" href="/styles1.css">
+</head>
+
+<body>
+    <%- include('partials/navbar.ejs'); %>
+
+    <div class='container'>
+        <div class='row'>
+            <div>
+                <h4>Kalendar rasporeda veterinara: <%=veterinar.ime%> <%=veterinar.prezime%></h4>
+            </div>
+            <div class='col-md-9 table-responsive'>
+                <table style="text-align:center" class="table table-sm table-bordered">
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"><%=dan[d]%></th>
+                        <th scope="col"><%=dan[(d+1)%7]%></th>
+                        <th scope="col"><%=dan[(d+2)%7]%></th>
+                        <th scope="col"><%=dan[(d+3)%7]%></th>
+                        <th scope="col"><%=dan[(d+4)%7]%></th>
+                        <th scope="col"><%=dan[(d+5)%7]%></th>
+                        <th scope="col"><%=dan[(d+6)%7]%></th>
+                    </tr>
+                    <tr>
+                        <th scope="row">08:00-09:00</th>
+                        <%for(var l=0; l<7; l++) {%>
+                        <% if(t[l]==undefined) {%>
+                        <td class="table-dark">Ne radimo</td>
+                        <%}else{ if(t[l].popunjen==true) {%>
+                        <td class="table-danger">Zauzet</td>
+                        <%}else{%>
+                        <td class="table-success">Slobodan</td>
+                        <%}}}%>
+                    </tr>
+                    <tr>
+                        <th scope="row">09:00-10:00</th>
+                        <%for(var l=7; l<14; l++) {%>
+                        <% if(t[l]==undefined) {%>
+                        <td class="table-dark">Ne radimo</td>
+                        <%}else{ if(t[l].popunjen==true) {%>
+                        <td class="table-danger">Zauzet</td>
+                        <%}else{%>
+                        <td class="table-success">Slobodan</td>
+                        <%}}}%>
+                    </tr>
+                    <tr>
+                        <th scope="row">10:00-11:00</th>
+                        <%for(var l=14; l<21; l++) {%>
+                        <% if(t[l]==undefined) {%>
+                        <td class="table-dark">Ne radimo</td>
+                        <%}else{ if(t[l].popunjen==true) {%>
+                        <td class="table-danger">Zauzet</td>
+                        <%}else{%>
+                        <td class="table-success">Slobodan</td>
+                        <%}}}%>
+                    </tr>
+                    <tr>
+                        <th scope="row">11:00-12:00</th>
+                        <%for(var l=21; l<28; l++) {%>
+                        <% if(t[l]==undefined) {%>
+                        <td class="table-dark">Ne radimo</td>
+                        <%}else{ if(t[l].popunjen==true) {%>
+                        <td class="table-danger">Zauzet</td>
+                        <%}else{%>
+                        <td class="table-success">Slobodan</td>
+                        <%}}}%>
+                    </tr>
+                    <tr>
+                        <th scope="row">12:00-13:00</th>
+                        <%for(var l=28; l<35; l++) {%>
+                        <% if(t[l]==undefined) {%>
+                        <td class="table-dark">Ne radimo</td>
+                        <%}else{ if(t[l].popunjen==true) {%>
+                        <td class="table-danger">Zauzet</td>
+                        <%}else{%>
+                        <td class="table-success">Slobodan</td>
+                        <%}}}%>
+                    </tr>
+                    <tr>
+                        <th scope="row">13:00-14:00</th>
+                        <%for(var l=35; l<42; l++) {%>
+                        <% if(t[l]==undefined) {%>
+                        <td class="table-dark">Ne radimo</td>
+                        <%}else{ if(t[l].popunjen==true) {%>
+                        <td class="table-danger">Zauzet</td>
+                        <%}else{%>
+                        <td class="table-success">Slobodan</td>
+                        <%}}}%>
+                    </tr>
+                    <tr>
+                        <th scope="row">14:00-15:00</th>
+                        <%for(var l=42; l<49; l++) {%>
+                        <% if(t[l]==undefined) {%>
+                        <td class="table-dark">Ne radimo</td>
+                        <%}else{ if(t[l].popunjen==true) {%>
+                        <td class="table-danger">Zauzet</td>
+                        <%}else{%>
+                        <td class="table-success">Slobodan</td>
+                        <%}}}%>
+                    </tr>
+                    <tr>
+                        <th scope="row">15:00-16:00</th>
+                        <%for(var l=49; l<56; l++) {%>
+                        <% if(t[l]==undefined) {%>
+                        <td class="table-dark">Ne radimo</td>
+                        <%}else{ if(t[l].popunjen==true) {%>
+                        <td class="table-danger">Zauzet</td>
+                        <%}else{%>
+                        <td class="table-success">Slobodan</td>
+                        <%}}}%>
+                    </tr>
+                    <tr>
+                        <th scope="row">16:00-17:00</th>
+                        <%for(var l=56; l<63; l++) {%>
+                        <% if(t[l]==undefined) {%>
+                        <td class="table-dark">Ne radimo</td>
+                        <%}else{ if(t[l].popunjen==true) {%>
+                        <td class="table-danger">Zauzet</td>
+                        <%}else{%>
+                        <td class="table-success">Slobodan</td>
+                        <%}}}%>
+                    </tr>
+                    <tr>
+                        <th scope="row">17:00-18:00</th>
+                        <%for(var l=63; l<70; l++) {%>
+                        <% if(t[l]==undefined) {%>
+                        <td class="table-dark">Ne radimo</td>
+                        <%}else{ if(t[l].popunjen==true) {%>
+                        <td class="table-danger">Zauzet</td>
+                        <%}else{%>
+                        <td class="table-success">Slobodan</td>
+                        <%}}}%>
+                    </tr>
+                    <tr>
+                        <th scope="row">18:00-19:00</th>
+                        <%for(var l=70; l<77; l++) {%>
+                        <% if(t[l]==undefined) {%>
+                        <td class="table-dark">Ne radimo</td>
+                        <%}else{ if(t[l].popunjen==true) {%>
+                        <td class="table-danger">Zauzet</td>
+                        <%}else{%>
+                        <td class="table-success">Slobodan</td>
+                        <%}}}%>
+                    </tr>
+                    <tr>
+                        <th scope="row">19:00-20:00</th>
+                        <%for(var l=77; l<84; l++) {%>
+                        <% if(t[l]==undefined) {%>
+                        <td class="table-dark">Ne radimo</td>
+                        <%}else{ if(t[l].popunjen==true) {%>
+                        <td class="table-danger">Zauzet</td>
+                        <%}else{%>
+                        <td class="table-success">Slobodan</td>
+                        <%}}}%>
+                    </tr>
+                    <tr>
+                        <th scope="row">20:00-21:00</th>
+                        <%for(var l=84; l<91; l++) {%>
+                        <% if(t[l]==undefined) {%>
+                        <td class="table-dark">Ne radimo</td>
+                        <%}else{ if(t[l].popunjen==true) {%>
+                        <td class="table-danger">Zauzet</td>
+                        <%}else{%>
+                        <td class="table-success">Slobodan</td>
+                        <%}}}%>
+                    </tr>
+                    <tr>
+                        <th scope="row">21:00-22:00</th>
+                        <%for(var l=91; l<98; l++) {%>
+                        <% if(t[l]==undefined) {%>
+                        <td class="table-dark">Ne radimo</td>
+                        <%}else{ if(t[l].popunjen==true) {%>
+                        <td class="table-danger">Zauzet</td>
+                        <%}else{%>
+                        <td class="table-success">Slobodan</td>
+                        <%}}}%>
+                    </tr>
+                </table>
+            </div>
+            <button class="open-button" onclick="openForm()">Rezervisi termin</button>
+            <div class="form-popup" id="myForm">
+                <% if(user!= undefined){%>
+                <form method='post' action='/rezervisi/<%=user._id%>/<%=idrasporeda%>?_method=PUT'
+                    class="form-container">
+                    <h3>Rezervacija</h3>
+
+                    <label for="dan"><b>Dan:</b></label>
+                    <select class="form-control" id="dan" name="dan">
+                        <option value="Ponedeljak">Ponedeljak</option>
+                        <option value="Utorak">Utorak</option>
+                        <option value="Sreda">Sreda</option>
+                        <option value="Cetvrtak">Cetvrtak</option>
+                        <option value="Petak">Petak</option>
+                        <option value="Subota">Subota</option>
+                        <option value="Nedelja">Nedelja</option>
+                    </select>
+
+                    <label for="vreme"><b>Vreme pocetka termina:</b></label>
+                    <select class="form-control" id="vreme" name="vreme">
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                    </select>
+
+                    <label for="opis"><b>Opis pregleda:</b></label>
+                    <input type="text" placeholder="Opis" name="opis" required>
+
+                    <button type="submit" class="btn">Rezervisi</button>
+                    <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
+                </form>
+                <%}else{%>
+                <form method='post' action='/rezervisi/<%=idrasporeda%>?_method=PUT'
+                class="form-container">
+                <h3>Rezervacija</h3>
+
+                <label for="dan"><b>Dan:</b></label>
+                <select class="form-control" id="dan" name="dan">
+                    <option value="Ponedeljak">Ponedeljak</option>
+                    <option value="Utorak">Utorak</option>
+                    <option value="Sreda">Sreda</option>
+                    <option value="Cetvrtak">Cetvrtak</option>
+                    <option value="Petak">Petak</option>
+                    <option value="Subota">Subota</option>
+                    <option value="Nedelja">Nedelja</option>
+                </select>
+
+                <label for="vreme"><b>Vreme pocetka termina:</b></label>
+                <select class="form-control" id="vreme" name="vreme">
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                </select>
+
+                <label for="opis"><b>Opis pregleda:</b></label>
+                <input type="text" placeholder="Opis" name="opis" required>
+
+                <button type="submit" class="btn">Rezervisi</button>
+                <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
+            </form>   <%}%>  
+            </div>
+        </div>
+    </div>
+
+    <script src="/pom3.js"></script>
+    <%- include ('partials/footer.ejs'); %>
